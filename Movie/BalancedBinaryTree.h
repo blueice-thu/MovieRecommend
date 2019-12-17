@@ -26,7 +26,7 @@ public:
 	~BalancedBinaryTree();
 	PNode CreateNode(char * c);
 	PNode CreateNode(char * c, int wi, int df, int oc, doc* at);
-	void InsertNode(char* c, bool* adjust);
+	bool InsertNode(char* c, bool* adjust);
 	void RemoveNode(char* c);
 	void EditNode();
 private:

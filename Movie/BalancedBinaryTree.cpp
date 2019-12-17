@@ -197,11 +197,11 @@ bool BalancedBinaryTree::insertRecursion(PNode pTemp, char * c, bool * adjust)
 			}
 		}
 	}
-	return false;
+	return true;
 }
 
 //
-void BalancedBinaryTree::InsertNode(char* c, bool* adjust)
+bool BalancedBinaryTree::InsertNode(char* c, bool* adjust)
 {
-	insertRecursion(pBase, c, adjust);
+	return insertRecursion(pBase, c, adjust);
 }
