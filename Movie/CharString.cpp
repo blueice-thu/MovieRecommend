@@ -196,3 +196,32 @@ void CharString::toChar(char* re)
 	strcpy(re, pBase);
 	re[this->length] = NULL;
 }
+char CharString::operator[](int nIndex)
+{
+	if (nIndex >= this->length)
+		return NULL;
+	else
+		return this->pBase[nIndex];
+}
+bool operator==(const CharString & CS1, const CharString & CS2)
+{
+	return isSameString(CS1, CS2);
+}
+bool operator>(const CharString & CS1, const CharString & CS2)
+{
+	int i = 0;
+	while (i < CS1.length && i < CS2.length)
+	{
+		if (CS1.pBase[i] > CS2.pBase[i])
+			return true;
+		else if (CS1.pBase[i] > CS2.pBase[i])
+			i++;
+		else
+			return false;
+	}
+	if (CS1.length - CS2.length > 0)
+		return true;
+	else
+		return false;
+	return false;
+}

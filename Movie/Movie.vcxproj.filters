@@ -24,13 +24,10 @@
     <ClCompile Include="CharStringLink.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="HashTable.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="HelpFunc.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Stack.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BalancedBinaryTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +38,10 @@
     <ClInclude Include="CharStringLink.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="HashTable.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="HelpFunc.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BalancedBinaryTree.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

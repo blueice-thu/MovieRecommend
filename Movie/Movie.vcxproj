@@ -151,18 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BalancedBinaryTree.cpp" />
     <ClCompile Include="CharString.cpp" />
     <ClCompile Include="CharStringLink.cpp" />
-    <ClCompile Include="HashTable.cpp" />
-    <ClCompile Include="HelpFunc.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BalancedBinaryTree.h" />
     <ClInclude Include="CharString.h" />
     <ClInclude Include="CharStringLink.h" />
-    <ClInclude Include="HashTable.h" />
-    <ClInclude Include="HelpFunc.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

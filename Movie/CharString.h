@@ -24,7 +24,10 @@ public:
 	CharString& operator = (const char* s);
 	void print() const;
 	friend bool isSameString(const CharString& CS1, const CharString& CS2);
+	friend bool operator==(const CharString& CS1, const CharString& CS2);
+	friend bool operator>(const CharString& CS1, const CharString& CS2);
 	void toChar(char* re);
+	char operator[](int nIndex);
 private:
 	char* pBase;
 	int length;
