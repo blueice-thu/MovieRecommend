@@ -9,9 +9,10 @@ BalancedBinaryTree::BalancedBinaryTree()
 PNode BalancedBinaryTree::CreateNode(char * c)
 {
 	PNode newNode = new word;
-	newNode->w = CharString(c);
-
-	//newNode->wordID = -1;
+	newNode->w = new char[50];
+	memset(newNode->w, 0, sizeof(char) * 50);
+	strcpy(newNode->w, c);
+	
 	newNode->df = 0;
 	newNode->occur = 0;
 	newNode->article = NULL;
@@ -26,7 +27,10 @@ PNode BalancedBinaryTree::CreateNode(char * c, int df, int oc, doc* at)
 {
 	PNode newNode = new word;
 
-	newNode->w = CharString(c);
+	newNode->w = new char[50];
+	memset(newNode->w, 0, sizeof(char) * 50);
+	strcpy(newNode->w, c);
+
 	newNode->df = df;
 	newNode->occur = oc;
 	newNode->article = at;
@@ -37,11 +41,11 @@ PNode BalancedBinaryTree::CreateNode(char * c, int df, int oc, doc* at)
 
 	return newNode;
 }
-doc * BalancedBinaryTree::CreateDoc(int id, int t)
+doc * BalancedBinaryTree::CreateDoc(int id)
 {
 	doc* d = new doc;
 	d->docID = id;
-	d->times = t;
+	d->times = 1;
 	d->next = NULL;
 	return d;
 }
@@ -62,7 +66,7 @@ BalancedBinaryTree::~BalancedBinaryTree()
 //ÓÒÐý Ë³Ê±ÕëÐý×ª
 void BalancedBinaryTree::R_Rotate(PNode* node)
 {
-	cout << "R_Rotate" << endl;
+	//cout << "R";
 	PNode tmp = (*node)->leftChild;
 	(*node)->leftChild = tmp->rightChild;
 	tmp->rightChild = (*node);
@@ -72,7 +76,7 @@ void BalancedBinaryTree::R_Rotate(PNode* node)
 //×óÐý£¬ÄæÊ±ÕëÐý×ª
 void BalancedBinaryTree::L_Rotate(PNode* node)
 {
-	cout << "L_Rotate" << endl;
+	//cout << "L";
 	PNode tmp = (*node)->rightChild;
 	(*node)->rightChild = tmp->leftChild;
 	tmp->leftChild = (*node);
@@ -146,21 +150,22 @@ void BalancedBinaryTree::rightBalance(PNode* node) {
 }
 
 //
-bool BalancedBinaryTree::insertRecursion(PNode pTemp, char * c, bool * adjust)
+bool BalancedBinaryTree::insertRecursion(PNode& pTemp, char * c, bool * adjust)
 {
 	if (pTemp == NULL)
 	{
-		// TODO
+		// Insert success
 		pTemp = CreateNode(c);
 		*adjust = true;
 		return true;
 	}
-	else if (pTemp->w == c)
+	int diff = strcmp(pTemp->w, c);
+	if (diff == 0)
 	{
 		*adjust = false;
 		return false;
 	}
-	else if (pTemp->w > c)
+	else if (diff > 0)
 	{
 		// insert to left child
 		if (!insertRecursion(pTemp->leftChild, c, adjust))
@@ -220,15 +225,16 @@ PNode BalancedBinaryTree::searchRecursion(PNode pTemp, char * c)
 {
 	if (!pTemp)
 		return NULL;
-	if (isSameString(pTemp->w, c))
+	int diff = strcmp(pTemp->w, c);
+	if (diff == 0)
 	{
-		return pBase;
+		return pTemp;
 	}
-	else if (pTemp->w > CharString(c) && pTemp->leftChild)
+	else if (diff > 0 && pTemp->leftChild)
 	{
 		return searchRecursion(pTemp->leftChild, c);
 	}
-	else if (!(pTemp->w > CharString(c)) && pTemp->rightChild)
+	else if (diff < 0 && pTemp->rightChild)
 	{
 		return searchRecursion(pTemp->rightChild, c);
 	}
@@ -250,7 +256,7 @@ void BalancedBinaryTree::UpdateNode(char * c, int newDocID)
 	node->occur++;
 	if (node->article == NULL)
 	{
-		node->article = CreateDoc(newDocID, 1);
+		node->article = CreateDoc(newDocID);
 		node->df++;
 	}
 	else
@@ -271,7 +277,7 @@ void BalancedBinaryTree::UpdateNode(char * c, int newDocID)
 			else
 			{
 				// a new doc
-				pDoc->next = CreateDoc(newDocID, 1);
+				pDoc->next = CreateDoc(newDocID);
 				break;
 			}
 		}

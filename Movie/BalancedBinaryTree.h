@@ -9,7 +9,7 @@ typedef struct doc
 }doc;
 typedef struct word
 {
-	CharString w;
+	char* w;
 	int df;		// The number of articles word occuring
 	int occur;	// The total times of word occuring
 	doc* article;
@@ -25,7 +25,7 @@ public:
 	~BalancedBinaryTree();
 	PNode CreateNode(char * c);
 	PNode CreateNode(char * c, int df, int oc, doc* at);
-	doc* CreateDoc(int id, int t);
+	doc* CreateDoc(int id);
 	bool InsertNode(char* c, bool* adjust);
 	PNode SearchNode(char* c);
 	void UpdateNode(char* c, int newDocID);
@@ -36,7 +36,7 @@ private:
 	void L_Rotate(PNode* node);
 	void leftBalance(PNode* node);
 	void rightBalance(PNode* node);
-	bool insertRecursion(PNode pTemp, char* c, bool* adjust);
+	bool insertRecursion(PNode& pTemp, char* c, bool* adjust);
 	PNode searchRecursion(PNode pTemp, char* c);
 	PNode pBase;
 };
