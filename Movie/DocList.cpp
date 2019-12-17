@@ -4,7 +4,7 @@
 
 DocList::DocList()
 {
-
+	head = NULL;
 }
 DocList::~DocList()
 {
@@ -16,11 +16,11 @@ DocList::~DocList()
 		head = temp;
 	}
 }
-doc * DocList::CreateDoc(int id)
+doc * DocList::CreateDoc(int id, int t = 0)
 {
 	doc* d = new doc;
 	d->docID = id;
-	d->times = 1;
+	d->times = t;
 	d->next = NULL;
 	return d;
 }
@@ -28,7 +28,7 @@ bool DocList::Add(int id)
 {
 	if (head == NULL)
 	{
-		head = CreateDoc(id);
+		head = CreateDoc(id, 1);
 	}
 	else
 	{
@@ -48,7 +48,41 @@ bool DocList::Add(int id)
 			else
 			{
 				// a new doc
-				pDoc->next = CreateDoc(id);
+				pDoc->next = CreateDoc(id, 1);
+				break;
+			}
+		}
+	}
+	return true;
+}
+bool DocList::Add(doc * node)
+{
+	if (!node)
+		return false;
+	int id = node->docID;
+	if (head == NULL)
+	{
+		head = CreateDoc(id, node->times);
+	}
+	else
+	{
+		doc* pDoc = head;
+		while (pDoc)
+		{
+			if (pDoc->docID == id)
+			{
+				// add doc to existing one
+				pDoc->times += node->times;
+				return false;
+			}
+			if (pDoc->next != NULL)
+			{
+				pDoc = pDoc->next;
+			}
+			else
+			{
+				// a new doc
+				pDoc->next = CreateDoc(id, node->times);
 				break;
 			}
 		}
@@ -99,4 +133,28 @@ doc * DocList::Edit(int id, int newDocID)
 	if (p)
 		p->docID = newDocID;
 	return p;
+}
+doc * DocList::Head()
+{
+	return head;
+}
+void DocList::Write(char * file, bool print)
+{
+	ofstream out(file, ios::app);
+	doc* temp = head;
+	while (temp)
+	{
+		out << "(" << temp->docID << "," << temp->times << ")";
+		if (print)
+			cout << "(" << temp->docID << "," << temp->times << ")";
+		temp = temp->next;
+		if (temp)
+		{
+			out << " ";
+			if (print)
+				cout << " ";
+		}
+	}
+	out << "\n";
+	out.close();
 }

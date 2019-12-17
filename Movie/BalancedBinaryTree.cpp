@@ -15,7 +15,7 @@ PNode BalancedBinaryTree::CreateNode(char * c)
 	
 	newNode->df = 0;
 	newNode->occur = 0;
-	newNode->article = NULL;
+	newNode->article = new DocList();
 
 	newNode->balanceState = EH;
 	newNode->leftChild = NULL;
@@ -33,21 +33,13 @@ PNode BalancedBinaryTree::CreateNode(char * c, int df, int oc, doc* at)
 
 	newNode->df = df;
 	newNode->occur = oc;
-	newNode->article = at;
+	newNode->article->Add(at->docID);
 
 	newNode->balanceState = EH;
 	newNode->leftChild = NULL;
 	newNode->rightChild = NULL;
 
 	return newNode;
-}
-doc * BalancedBinaryTree::CreateDoc(int id)
-{
-	doc* d = new doc;
-	d->docID = id;
-	d->times = 1;
-	d->next = NULL;
-	return d;
 }
 BalancedBinaryTree::~BalancedBinaryTree()
 {
@@ -244,32 +236,7 @@ void BalancedBinaryTree::UpdateNode(char * c, int newDocID)
 	if (node == NULL)
 		return;
 	node->occur++;
-	if (node->article == NULL)
-	{
-		node->article = CreateDoc(newDocID);
+	if (node->article->Add(newDocID))
 		node->df++;
-	}
-	else
-	{
-		doc* pDoc = node->article;
-		while (pDoc)
-		{
-			if (pDoc->docID == newDocID)
-			{
-				// add doc to existing one
-				pDoc->times++;
-				break;
-			}
-			if (pDoc->next != NULL)
-			{
-				pDoc = pDoc->next;
-			}
-			else
-			{
-				// a new doc
-				pDoc->next = CreateDoc(newDocID);
-				break;
-			}
-		}
-	}
+	node->occur++;
 }

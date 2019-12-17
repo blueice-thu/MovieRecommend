@@ -8,7 +8,7 @@ typedef struct word
 	char* w;
 	int df;		// The number of articles word occuring
 	int occur;	// The total times of word occuring
-	doc* article;
+	DocList* article;
 
 	BalanceFactor balanceState;
 	struct word *leftChild, *rightChild;

@@ -171,10 +171,8 @@ int main()
 		int docID = CharToInt(txtNameTemp);
 		char wordTemp[40];
 		ifstream readTxt(txtNameTemp);
-		//cout << txtNameTemp << endl;
 		while (readTxt.getline(wordTemp, 40))
 		{
-			//cout << wordTemp << ",";
 			dict->UpdateNode(wordTemp, docID);
 		}
 		readTxt.close();
@@ -186,16 +184,23 @@ int main()
 	char query1File[] = "query1.txt";
 	char result1File[] = "result1.txt";
 	ifstream readQuery1(query1File);
+
+	// Clear out file
 	ofstream writeResult1(result1File);
+	writeResult1.close();
 
 	char sentTemp[100];
 	while (readQuery1.getline(sentTemp, 100))
 	{
 		// Read a line
 		int lenSent = strlen(sentTemp);
-		doc* searchResult = NULL;
+		DocList* resultList = new DocList();
 		for (int i = 0; i < lenSent; i++)
 		{
+			while (sentTemp[i] == ' ')
+				i++;
+			if (i >= lenSent)
+				break;
 			// Read a word
 			char aWord[50] = { '\0' };
 			int end = i + 1;
@@ -206,42 +211,23 @@ int main()
 				aWord[j] = sentTemp[i + j];
 			}
 			i = end;
-			//cout << aWord << endl;
-			//writeResult1 << aWord << endl;
 
 			// Get document list of aWord
-			if (searchResult == NULL)
+			PNode re = dict->SearchNode(aWord);
+			doc* reDoc = NULL;
+			if (re)
+				reDoc = re->article->Head();
+			while (reDoc)
 			{
-				PNode temp = dict->SearchNode(aWord);
-				if (temp)
-					searchResult = temp->article;
-			}
-			else
-			{
-				doc* temp = searchResult;
-				while (temp->next != NULL)
-					temp = temp->next;
-				temp->next = dict->SearchNode(aWord)->article;
+				resultList->Add(reDoc);
+				reDoc = reDoc->next;
 			}
 		}
 
 		// Write result to outfile
-		while (searchResult)
-		{
-			writeResult1 << "(" << searchResult->docID << "," << searchResult->times << ")";
-			cout << "(" << searchResult->docID << "," << searchResult->times << ")";
-			searchResult = searchResult->next;
-			if (searchResult)
-			{
-				writeResult1 << " ";
-				cout << " ";
-			}
-		}
-		writeResult1 << "\n";
-		cout << "\n";
+		resultList->Write(result1File);
+		delete resultList;
 	}
 	readQuery1.close();
-	writeResult1.close();
-
 
 }
