@@ -154,6 +154,7 @@
     <ClCompile Include="BalancedBinaryTree.cpp" />
     <ClCompile Include="CharString.cpp" />
     <ClCompile Include="CharStringLink.cpp" />
+    <ClCompile Include="DocList.cpp" />
     <ClCompile Include="HelpFunc.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="Stack.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="BalancedBinaryTree.h" />
     <ClInclude Include="CharString.h" />
     <ClInclude Include="CharStringLink.h" />
+    <ClInclude Include="DocList.h" />
     <ClInclude Include="HelpFunc.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>

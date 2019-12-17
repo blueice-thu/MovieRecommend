@@ -49,16 +49,6 @@ doc * BalancedBinaryTree::CreateDoc(int id)
 	d->next = NULL;
 	return d;
 }
-inline void FreeDocList(doc* head)
-{
-	doc* temp;
-	while (head)
-	{
-		temp = head->next;
-		delete head;
-		head = temp;
-	}
-}
 BalancedBinaryTree::~BalancedBinaryTree()
 {
 

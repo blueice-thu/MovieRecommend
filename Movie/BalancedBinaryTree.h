@@ -1,12 +1,8 @@
 #pragma once
 #include "CharString.h"
+#include "DocList.h"
 enum BalanceFactor { EH, LH, RH };
-typedef struct doc
-{
-	int docID;
-	int times;
-	struct doc* next;
-}doc;
+
 typedef struct word
 {
 	char* w;
