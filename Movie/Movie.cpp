@@ -7,29 +7,24 @@
 #include <windows.h>
 
 using namespace std;
-
-string Utf8ToGbk(const char *src_str)
+void InfoToTxt(char* c)
 {
-	int len = MultiByteToWideChar(CP_UTF8, 0, src_str, -1, NULL, 0);
-	wchar_t* wszGBK = new wchar_t[len + 1];
-	memset(wszGBK, 0, (len + 1) * sizeof(wchar_t));
-
-	MultiByteToWideChar(CP_UTF8, 0, src_str, -1, wszGBK, len);
-	len = WideCharToMultiByte(CP_ACP, 0, wszGBK, -1, NULL, 0, NULL, NULL);
-
-	char* szGBK = new char[len + 1];
-	memset(szGBK, 0, (len + 1) * sizeof(char));
-	WideCharToMultiByte(CP_ACP, 0, wszGBK, -1, szGBK, len, NULL, NULL);
-	string strTemp(szGBK);
-
-	if (wszGBK != NULL)
-		delete[] wszGBK;
-	if (szGBK != NULL)
-		delete[] szGBK;
-
-	return strTemp;
+	int i = 0;
+	while (c[i] >= '0' && c[i] <= '9')
+		i++;
+	// c[i] = point
+	c[++i] = 't'; c[++i] = 'x'; c[++i] = 't';
+	c[++i] = '\0';
 }
-
+void InfoToTxt(char* c)
+{
+	int i = 0;
+	while (c[i] >= '0' && c[i] <= '9')
+		i++;
+	// c[i] = point
+	c[++i] = 'i'; c[++i] = 'n'; c[++i] = 'f'; c[++i] = '0';
+	c[++i] = '\0';
+}
 inline int CharToInt(char* c)
 {
 	int result = 0;
@@ -184,7 +179,6 @@ int main()
 	char query1File[] = "query1.txt";
 	char result1File[] = "result1.txt";
 	ifstream readQuery1(query1File);
-
 	// Clear out file
 	ofstream writeResult1(result1File);
 	writeResult1.close();
@@ -223,11 +217,79 @@ int main()
 				reDoc = reDoc->next;
 			}
 		}
-
+		resultList->Sort();
+		resultList->Print();
+		cout << endl;
 		// Write result to outfile
 		resultList->Write(result1File);
 		delete resultList;
 	}
 	readQuery1.close();
+
+	//exit(0);
+
+	// Deal with query2.txt
+	char query2File[] = "query2.txt";
+	char result2File[] = "result2.txt";
+	ifstream readQuery2(query2File);
+	ofstream writeResult2(result2File);
+
+	// Get all .info file name
+	char infoPathName[15] = u8".\\input\\";
+	char infoFormat[10] = u8".info";
+	CharStringLink* infoFileList = new CharStringLink();
+	GetFileList(infoFileList, infoPathName, infoFormat);
+	cout << "Get all .info file name" << endl;
+
+	char movieTitle[50];
+	ifstream readInfo;
+	while (readQuery2.getline(movieTitle, 50))
+	{
+		// Read a query
+		BaseCharString* pInfoList = infoFileList->getBase()->next;
+		char infoTitle[50] = { '\0' }; // the movie name
+		char infoName[40] = { '\0' }; // the .info name
+		bool find = false;
+		while (pInfoList)
+		{
+			// Find movie in .info file
+			pInfoList->data->toChar(infoName);
+			readInfo.open(infoName);
+			readInfo.getline(infoTitle, 50);
+			readInfo.close();
+
+			if (strcmp(movieTitle, infoTitle) == 0)
+			{
+				// Find aim movie
+				InfoToTxt(infoName);
+				ifstream readTxt(infoName);
+				DocList* resultList = new DocList();
+				char txtTemp[50] = { '\0' };
+				while (readTxt.getline(txtTemp, 50))
+				{
+					PNode re = dict->SearchNode(txtTemp);
+					doc* reDoc = NULL;
+					if (re)
+						reDoc = re->article->Head();
+					while (reDoc)
+					{
+						resultList->Add(reDoc);
+						reDoc = reDoc->next;
+					}
+				}
+				resultList->Sort();
+				resultList->Print();
+				cout << endl;
+				// TODO
+				find = true;
+				break;
+			}
+		}
+		if (!find)
+			writeResult2 << "该电影不在数据库中，无法推荐 ";
+	}
+
+	readQuery2.close();
+	writeResult2.close();
 
 }
