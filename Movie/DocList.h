@@ -25,7 +25,7 @@ public:
 	doc* Search(int id);
 	doc* Edit(int id, int newDocID);
 	doc* Head();
-	void Write(char* file, bool print = true);
+	void Write(char* file);
 	void Sort();
 	void Print();
 private:

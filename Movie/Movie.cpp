@@ -101,7 +101,7 @@ void LoadDict(BalancedBinaryTree* dict, char* path)
 		//cout << temp[max_num] << ",";
 		max_num++;
 	}
-	cout << "dict num: " << max_num << endl;
+	//cout << "dict num: " << max_num << endl;
 	readDict.close();
 	// 折半插入
 	bool adjust = false;
@@ -210,6 +210,7 @@ int main()
 				i++;
 			if (i >= lenSent)
 				break;
+
 			// Read a word
 			char aWord[50] = { '\0' };
 			int end = i + 1;
@@ -233,7 +234,7 @@ int main()
 			}
 		}
 		resultList->Sort();
-		resultList->Print();
+		//resultList->Print();
 		cout << endl;
 		// Write result to outfile
 		resultList->Write(result1File);
@@ -328,17 +329,17 @@ int main()
 					strcat(path, filename);
 
 					readInfo.open(path);
-					char moviename[50] = { '\0' };
-					readInfo.getline(moviename, 50);
+					char moviename[100] = { '\0' };
+					readInfo.getline(moviename, 100);
 					writeResult2 << "(" << pDoc->docID << ","
 						<< moviename << ") ";
-					cout << "(" << pDoc->docID << ","
-						<< moviename << ") ";
+					//cout << "(" << pDoc->docID << ","
+					//	<< moviename << ") ";
 					readInfo.close();
 					pDoc = pDoc->next;
 				}
 				writeResult2 << endl;
-				cout << endl;
+				//cout << endl;
 				find = true;
 				break;
 			}

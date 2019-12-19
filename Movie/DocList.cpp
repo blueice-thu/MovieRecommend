@@ -141,21 +141,17 @@ doc * DocList::Head()
 {
 	return head;
 }
-void DocList::Write(char * file, bool print)
+void DocList::Write(char * file)
 {
 	ofstream out(file, ios::app);
 	doc* temp = head;
 	while (temp)
 	{
 		out << "(" << temp->docID << "," << temp->times << ")";
-		if (print)
-			cout << "(" << temp->docID << "," << temp->times << ")";
 		temp = temp->next;
 		if (temp)
 		{
 			out << " ";
-			if (print)
-				cout << " ";
 		}
 	}
 	out << "\n";
