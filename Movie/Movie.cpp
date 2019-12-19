@@ -7,23 +7,38 @@
 #include <windows.h>
 
 using namespace std;
+#define MAX_COMMAND 5
+
 void InfoToTxt(char* c)
 {
 	int i = 0;
+	while (!(c[i] >= '0' && c[i] <= '9'))
+		i++;
 	while (c[i] >= '0' && c[i] <= '9')
 		i++;
 	// c[i] = point
 	c[++i] = 't'; c[++i] = 'x'; c[++i] = 't';
 	c[++i] = '\0';
 }
-void InfoToTxt(char* c)
+void TxtToInfo(char* c)
 {
 	int i = 0;
+	while (!(c[i] >= '0' && c[i] <= '9'))
+		i++;
 	while (c[i] >= '0' && c[i] <= '9')
 		i++;
 	// c[i] = point
 	c[++i] = 'i'; c[++i] = 'n'; c[++i] = 'f'; c[++i] = '0';
 	c[++i] = '\0';
+}
+void IdToInfo(int id, char* str)
+{
+	_itoa(id, str, 10);
+	int i = 0;
+	while (str[i] != '\0')
+		i++;
+	str[i++] = '.'; str[i++] = 'i'; str[i++] = 'n'; str[i++] = 'f'; str[i++] = 'o';
+	str[i++] = '\0';
 }
 inline int CharToInt(char* c)
 {
@@ -226,7 +241,6 @@ int main()
 	}
 	readQuery1.close();
 
-	//exit(0);
 
 	// Deal with query2.txt
 	char query2File[] = "query2.txt";
@@ -241,26 +255,47 @@ int main()
 	GetFileList(infoFileList, infoPathName, infoFormat);
 	cout << "Get all .info file name" << endl;
 
-	char movieTitle[50];
+	char movieTitle[100];
 	ifstream readInfo;
 	while (readQuery2.getline(movieTitle, 50))
 	{
+		// Delete space
+		int i = 0;
+		while (movieTitle[i] != '\0' && movieTitle[i] != ' ')
+			i++;
+		while (i < 100)
+		{
+			movieTitle[i] = '\0';
+			i++;
+		}
+
 		// Read a query
 		BaseCharString* pInfoList = infoFileList->getBase()->next;
-		char infoTitle[50] = { '\0' }; // the movie name
-		char infoName[40] = { '\0' }; // the .info name
+		char infoTitle[100] = { '\0' }; // the movie name
+		char infoName[40] = { '\0' }; // the .info file name
 		bool find = false;
+
+		// Find movie in .info file
 		while (pInfoList)
 		{
-			// Find movie in .info file
 			pInfoList->data->toChar(infoName);
 			readInfo.open(infoName);
 			readInfo.getline(infoTitle, 50);
 			readInfo.close();
 
+			// Delete space
+			int i = 0;
+			while (infoTitle[i] != '\0' && infoTitle[i] != ' ')
+				i++;
+			while (i < 100)
+			{
+				infoTitle[i] = '\0';
+				i++;
+			}
+
+			// Find given aim movie
 			if (strcmp(movieTitle, infoTitle) == 0)
 			{
-				// Find aim movie
 				InfoToTxt(infoName);
 				ifstream readTxt(infoName);
 				DocList* resultList = new DocList();
@@ -278,11 +313,38 @@ int main()
 					}
 				}
 				resultList->Sort();
-				resultList->Print();
+
+				// Get movie name, skip the first one
+				doc* pDoc = resultList->Head()->next;
+				for (int i = 0; i < MAX_COMMAND; i++)
+				{
+					if (!pDoc)
+						break;
+
+					char path[100] = u8".\\input\\";
+
+					char filename[100] = { '\0' };
+					IdToInfo(pDoc->docID, filename);
+					strcat(path, filename);
+
+					readInfo.open(path);
+					char moviename[50] = { '\0' };
+					readInfo.getline(moviename, 50);
+					writeResult2 << "(" << pDoc->docID << ","
+						<< moviename << ") ";
+					cout << "(" << pDoc->docID << ","
+						<< moviename << ") ";
+					readInfo.close();
+					pDoc = pDoc->next;
+				}
+				writeResult2 << endl;
 				cout << endl;
-				// TODO
 				find = true;
 				break;
+			}
+			else
+			{
+				pInfoList = pInfoList->next;
 			}
 		}
 		if (!find)
