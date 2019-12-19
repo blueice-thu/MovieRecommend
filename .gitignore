@@ -33,5 +33,5 @@
 
 Debug/
 Movie/Debug/
-Movie/input/
+# Movie/input/
 .vs/

@@ -235,7 +235,7 @@ int main()
 		}
 		resultList->Sort();
 		//resultList->Print();
-		cout << endl;
+		//cout << endl;
 		// Write result to outfile
 		resultList->Write(result1File);
 		delete resultList;
@@ -349,7 +349,7 @@ int main()
 			}
 		}
 		if (!find)
-			writeResult2 << "该电影不在数据库中，无法推荐 ";
+			writeResult2 << u8"该电影不在数据库中，无法推荐\n";
 	}
 
 	readQuery2.close();
