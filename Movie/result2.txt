@@ -1,8 +1,9 @@
 (467,太极张三丰 太極張三豐) (691,珍珠港 Pearl Harbor) (243,爱在午夜降临前 Before Midnight) (588,我，花样女王 I, Tonya) (33,十二怒汉 12 Angry Men) 
-(256,好家伙 Goodfellas) (342,疯狂约会美丽都 Les triplettes de Belleville) (693,毁灭之路 Road to Perdition) (179,终结者2：审判日 Terminator 2: Judgment Day) (510,王牌特工：特工学院 Kingsman: The Secret Service) 
+(46,飞越疯人院 One Flew Over the Cuckoo&#39;s Nest) (89,第六感 The Sixth Sense) (965,玉女风流 One, Two, Three) (258,X战警：逆转未来 X-Men: Days of Future Past) (727,幻影凶间 1408) 
 (414,深蓝 Deep Blue) (986,黑洞频率 Frequency) (70,穿条纹睡衣的男孩 The Boy in the Striped Pajamas) (302,神奇动物在哪里 Fantastic Beasts and Where to Find Them) (159,穿越时空的少女 時をかける少女) 
 该电影不在数据库中，无法推荐
 该电影不在数据库中，无法推荐
 (132,贫民窟的百万富翁 Slumdog Millionaire) (182,源代码 Source Code) (836,大幻影 La Grande Illusion) (160,罗生门 羅生門) (434,西雅图未眠夜 Sleepless in Seattle) 
 (0,霸王别姬) (301,极速风流 Rush) (203,末路狂花 Thelma &amp; Louise) (471,爱乐之城 La La Land) (498,黄昏双镖客 Per qualche dollaro in più) 
 (445,蓝色大门 藍色大門) (182,源代码 Source Code) (712,鬼妈妈 Coraline) (173,朗读者 The Reader) (13,放牛班的春天 Les choristes) 
+(937,深渊 The Abyss) (745,蒙太奇 몽타주) (286,为奴十二年 12 Years a Slave) (368,超人总动员 The Incredibles) (321,落水狗 Reservoir Dogs) 
