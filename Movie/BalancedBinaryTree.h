@@ -3,6 +3,7 @@
 #include "DocList.h"
 enum BalanceFactor { EH, LH, RH };
 
+// A node of BalancedBinaryTree
 typedef struct word
 {
 	char* w;
@@ -13,6 +14,7 @@ typedef struct word
 	BalanceFactor balanceState;
 	struct word *leftChild, *rightChild;
 }*PNode;
+
 // https://blog.csdn.net/xwm1993/article/details/80405430
 class BalancedBinaryTree
 {
@@ -21,12 +23,12 @@ public:
 	~BalancedBinaryTree();
 	PNode CreateNode(char * c);
 	PNode CreateNode(char * c, int df, int oc, doc* at);
-	doc* CreateDoc(int id);
 	bool InsertNode(char* c, bool* adjust);
 	PNode SearchNode(char* c);
 	void UpdateNode(char* c, int newDocID);
-	void RemoveNode(char* c);
-	void EditNode();
+	void ClearTree(PNode root);
+	bool RemoveNode(PNode &root, char* c, bool &shorter);
+	void EditNode(char* c, int newdf = -1, int newoccur = -1);
 private:
 	void R_Rotate(PNode* node);
 	void L_Rotate(PNode* node);

@@ -1,11 +1,10 @@
 #include "BalancedBinaryTree.h"
 
-
-
 BalancedBinaryTree::BalancedBinaryTree()
 {
 	pBase = NULL;
 }
+
 PNode BalancedBinaryTree::CreateNode(char * c)
 {
 	PNode newNode = new word;
@@ -23,6 +22,7 @@ PNode BalancedBinaryTree::CreateNode(char * c)
 
 	return newNode;
 }
+
 PNode BalancedBinaryTree::CreateNode(char * c, int df, int oc, doc* at)
 {
 	PNode newNode = new word;
@@ -41,41 +41,58 @@ PNode BalancedBinaryTree::CreateNode(char * c, int df, int oc, doc* at)
 
 	return newNode;
 }
+
 BalancedBinaryTree::~BalancedBinaryTree()
 {
-
+	ClearTree(pBase);
+	pBase = NULL;
 }
-//ÓÒÐý Ë³Ê±ÕëÐý×ª
+
+// Function: delete tree by preorder traversal
+void BalancedBinaryTree::ClearTree(PNode root)
+{
+	if (root)
+	{
+		ClearTree(root->leftChild);
+		ClearTree(root->rightChild);
+		if (root->w)
+			delete[] root->w;
+		if (root->article)
+			delete root->article;
+		delete root;
+	}
+}
+
+// Function: right-handed rotation
 void BalancedBinaryTree::R_Rotate(PNode* node)
 {
-	//cout << "R";
 	PNode tmp = (*node)->leftChild;
 	(*node)->leftChild = tmp->rightChild;
 	tmp->rightChild = (*node);
 	(*node) = tmp;
 }
 
-//×óÐý£¬ÄæÊ±ÕëÐý×ª
+// Function: left-handed rotation
 void BalancedBinaryTree::L_Rotate(PNode* node)
 {
-	//cout << "L";
 	PNode tmp = (*node)->rightChild;
 	(*node)->rightChild = tmp->leftChild;
 	tmp->leftChild = (*node);
 	(*node) = tmp;
 }
 
-//×ó±ßÊ§ºâµ÷Õû
-void BalancedBinaryTree::leftBalance(PNode* node) {
+// Left imbalance adjustment
+void BalancedBinaryTree::leftBalance(PNode* node)
+{
 	PNode leftchild = (*node)->leftChild;
 	PNode tmpRightChild = NULL;
 	switch (leftchild->balanceState)
 	{
-	case LH:                                                                     //LLÐÍÊ§ºâ
+	case LH:                                                                     // LL
 		(*node)->balanceState = leftchild->balanceState = EH;
 		R_Rotate(node);
 		break;
-	case RH:                                                                    //LRÐÍÊ§ºâ
+	case RH:                                                                    // LR
 		tmpRightChild = leftchild->rightChild;
 		switch (tmpRightChild->balanceState)
 		{
@@ -98,17 +115,18 @@ void BalancedBinaryTree::leftBalance(PNode* node) {
 	}
 }
 
-//ÓÒ±ßÊ§ºâµ÷Õû
-void BalancedBinaryTree::rightBalance(PNode* node) {
+// Right imbalance adjustment
+void BalancedBinaryTree::rightBalance(PNode* node)
+{
 	PNode rightchild = (*node)->rightChild;
 	PNode tmpChild = NULL;
 	switch (rightchild->balanceState)
 	{
-	case RH:                                                                          //RRÐÍÊ§ºâ
+	case RH:                                                                          // RR
 		(*node)->balanceState = rightchild->balanceState = EH;
 		L_Rotate(node);
 		break;
-	case LH:                                                                         //RLÐÍÊ§ºâ
+	case LH:                                                                         // RL
 		tmpChild = rightchild->leftChild;
 		switch (tmpChild->balanceState)
 		{
@@ -131,7 +149,7 @@ void BalancedBinaryTree::rightBalance(PNode* node) {
 	}
 }
 
-//
+// Function: insert a string by Recursion and adjust
 bool BalancedBinaryTree::insertRecursion(PNode& pTemp, char * c, bool * adjust)
 {
 	if (pTemp == NULL)
@@ -198,11 +216,14 @@ bool BalancedBinaryTree::insertRecursion(PNode& pTemp, char * c, bool * adjust)
 	return true;
 }
 
-//
+// Function: insert a string into the tree
+//		if the string exists, return false
 bool BalancedBinaryTree::InsertNode(char* c, bool* adjust)
 {
 	return insertRecursion(pBase, c, adjust);
 }
+
+// Function: search a string by Recursion
 PNode BalancedBinaryTree::searchRecursion(PNode pTemp, char * c)
 {
 	if (!pTemp)
@@ -223,13 +244,14 @@ PNode BalancedBinaryTree::searchRecursion(PNode pTemp, char * c)
 	else
 		return NULL;
 }
-//
+// Function: search a string in the tree
+//		if the string doesn't exist, return NULL
 PNode BalancedBinaryTree::SearchNode(char * c)
 {
 	return searchRecursion(pBase, c);
 }
 
-// 
+// Function: add a new doc node to a tree node
 void BalancedBinaryTree::UpdateNode(char * c, int newDocID)
 {
 	PNode node = SearchNode(c);
@@ -239,4 +261,109 @@ void BalancedBinaryTree::UpdateNode(char * c, int newDocID)
 	if (node->article->Add(newDocID))
 		node->df++;
 	node->occur++;
+}
+
+// Function: remove a node
+bool BalancedBinaryTree::RemoveNode(PNode &root, char* c, bool &shorter)
+{
+	if (root == NULL) {
+		return false;
+	}
+	int diff = strcmp(root->w, c);
+	if (diff == 0)
+	{
+		PNode tmp = NULL;
+		if (root->leftChild == NULL)
+		{
+			tmp = root;
+			root = root->rightChild;
+			delete tmp;
+			shorter = true;
+		}
+		else if (root->rightChild == NULL)
+		{
+			tmp = root;
+			root = root->leftChild;
+			delete tmp;
+			shorter = true;
+		}
+		else
+		{
+			tmp = root->leftChild;
+			while (tmp->rightChild) {
+				tmp = tmp->rightChild;
+			}
+			if (root->w)
+				delete[](root->w);
+			strcpy(root->w, c);
+			RemoveNode(root->leftChild, tmp->w, shorter);
+		}
+	}
+	else if (diff > 0)
+	{
+		if (!RemoveNode(root->leftChild, c, shorter))
+		{
+			return false;
+		}
+		if (shorter)
+		{
+			switch (root->balanceState)
+			{
+			case LH:
+				root->balanceState = EH;
+				shorter = true;
+				break;
+			case RH:
+				rightBalance(&root);
+				if (root->rightChild->balanceState == EH)
+					shorter = false;
+				else
+					shorter = true;
+				break;
+			case EH:
+				root->balanceState = RH;
+				shorter = false;
+				break;
+			}
+		}
+	}
+	else
+	{
+		if (!RemoveNode(root->rightChild, c, shorter)) {
+			return false;
+		}
+		if (shorter) {
+			switch (root->balanceState)
+			{
+			case LH:
+				leftBalance(&root);
+				if (root->leftChild->balanceState == EH)
+					shorter = false;
+				else
+					shorter = true;
+				break;
+			case EH:
+				root->balanceState = LH;
+				shorter = false;
+				break;
+			case RH:
+				root->balanceState = EH;
+				shorter = true;
+				break;
+			}
+		}
+	}
+	return true;
+}
+
+// Function: edit a node
+void BalancedBinaryTree::EditNode(char* c, int newdf = -1, int newoccur = -1)
+{
+	PNode node = SearchNode(c);
+	if (node == NULL)
+		return;
+	if (newdf >= 0)
+		node->df = newdf;
+	if (newoccur >= 0)
+		node->df = newoccur;
 }

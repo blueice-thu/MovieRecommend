@@ -12,8 +12,9 @@ using namespace std;
 
 int main()
 {
-	system("chcp 65001");
+	//system("chcp 65001");
 
+	/********************** Load dictionary **********************/
 	// Load dictionary from the given file .dic
 	char dictPath[] = ".\\dictionary\\mydict.dic";
 	BalancedBinaryTree* dict = new BalancedBinaryTree();
@@ -27,7 +28,7 @@ int main()
 	GetFileList(txtFileList, txtPathName, txtFormat);
 	cout << "Get all .txt file name" << endl;
 	
-	// Build document list
+	/********************** Build document list **********************/
 	BaseCharString* pTxtList = txtFileList->getBase()->next;
 	while (pTxtList != NULL)
 	{
@@ -43,13 +44,14 @@ int main()
 		readTxt.close();
 		pTxtList = pTxtList->next;
 	}
-	cout << "Build document list" << endl;
+	cout << "Build document list finished" << endl;
 
-	// Deal with query1.txt
+	/********************** Deal with query1 **********************/
+	// Read query1.txt
 	char query1File[] = "query1.txt";
 	char result1File[] = "result1.txt";
 	ifstream readQuery1(query1File);
-	// Clear out file
+	// Clear out files
 	ofstream writeResult1(result1File);
 	writeResult1.close();
 
@@ -89,8 +91,7 @@ int main()
 			}
 		}
 		resultList->Sort();
-		//resultList->Print();
-		//cout << endl;
+
 		// Write result to outfile
 		resultList->Write(result1File);
 		delete resultList;
@@ -99,6 +100,7 @@ int main()
 	cout << "query 1 finished\n";
 
 
+	/********************** Deal with query2 **********************/
 	// Deal with query2.txt
 	char query2File[] = "query2.txt";
 	char result2File[] = "result2.txt";
@@ -126,7 +128,7 @@ int main()
 			i++;
 		}
 
-		// Read a query
+		// Read one query
 		BaseCharString* pInfoList = infoFileList->getBase()->next;
 		char infoTitle[100] = { '\0' }; // the movie name
 		char infoName[40] = { '\0' }; // the .info file name

@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// A node of DocList
 typedef struct doc
 {
 	int docID;

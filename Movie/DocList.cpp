@@ -1,11 +1,10 @@
 #include "DocList.h"
 
-
-
 DocList::DocList()
 {
 	head = NULL;
 }
+
 DocList::~DocList()
 {
 	doc* temp;
@@ -16,7 +15,9 @@ DocList::~DocList()
 		head = temp;
 	}
 }
-// Default: an empty doc node
+
+// Function: create a DocList node
+//		default: an empty node
 doc * DocList::CreateDoc(int id, int t = 0, int mul = 0)
 {
 	doc* d = new doc;
@@ -26,6 +27,8 @@ doc * DocList::CreateDoc(int id, int t = 0, int mul = 0)
 	d->next = NULL;
 	return d;
 }
+
+// Function: add a node by id
 bool DocList::Add(int id)
 {
 	if (head == NULL)
@@ -57,6 +60,8 @@ bool DocList::Add(int id)
 	}
 	return true;
 }
+
+// Function: add a node by node
 bool DocList::Add(doc * node)
 {
 	if (!node)
@@ -92,6 +97,8 @@ bool DocList::Add(doc * node)
 	}
 	return true;
 }
+
+// Function: Search a node by id
 doc* DocList::Search(int id)
 {
 	doc* temp = head;
@@ -103,6 +110,8 @@ doc* DocList::Search(int id)
 	}
 	return NULL;
 }
+
+// Function: remove a node
 bool DocList::Remove(int id)
 {
 	if (!head)
@@ -130,6 +139,8 @@ bool DocList::Remove(int id)
 
 	return false;
 }
+
+// Function: edit a node
 doc * DocList::Edit(int id, int newDocID)
 {
 	doc* p = Search(id);
@@ -137,10 +148,14 @@ doc * DocList::Edit(int id, int newDocID)
 		p->docID = newDocID;
 	return p;
 }
+
+// Function: return the head point of the doc list
 doc * DocList::Head()
 {
 	return head;
 }
+
+// Funtion: write the DocList to special path
 void DocList::Write(char * file)
 {
 	ofstream out(file, ios::app);
@@ -157,6 +172,8 @@ void DocList::Write(char * file)
 	out << "\n";
 	out.close();
 }
+
+// Function: swap two nodes (node 1 and node 2)
 void swapNode(doc* node0)
 {
 	if (node0 == NULL || node0->next == NULL || node0->next->next == NULL)
@@ -168,6 +185,8 @@ void swapNode(doc* node0)
 	node1->next = node3;
 	node2->next = node1;
 }
+
+// Function: sort the list by multiWord (first) and times (second)
 void DocList::Sort()
 {
 	if (head == NULL || head->next == NULL)
@@ -218,6 +237,8 @@ void DocList::Sort()
 	head = pre_head->next;
 	delete pre_head;
 }
+
+// Function: print the doc list
 void DocList::Print()
 {
 	doc* temp = head;
