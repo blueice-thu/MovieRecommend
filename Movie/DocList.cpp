@@ -225,7 +225,7 @@ void DocList::Sort()
 				swapNode(new_head);
 				lastChange = i;
 			}
-			else if (new_head->next->times < new_head->next->next->times)
+			else if (new_head->next->multiWord == new_head->next->next->multiWord && new_head->next->times < new_head->next->next->times)
 			{
 				swapNode(new_head);
 				lastChange = i;

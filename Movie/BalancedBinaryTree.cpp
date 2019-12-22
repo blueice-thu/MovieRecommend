@@ -357,7 +357,7 @@ bool BalancedBinaryTree::RemoveNode(PNode &root, char* c, bool &shorter)
 }
 
 // Function: edit a node
-void BalancedBinaryTree::EditNode(char* c, int newdf = -1, int newoccur = -1)
+void BalancedBinaryTree::EditNode(char* c, int newdf, int newoccur)
 {
 	PNode node = SearchNode(c);
 	if (node == NULL)

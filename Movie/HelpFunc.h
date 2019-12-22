@@ -33,7 +33,8 @@ void GetFileList(CharStringLink* inFileList, const char* inPath, const char* inF
 
 // Function: add all words of .dict file into a BalancedBinaryTree in specifical order
 // Order: [0, 1, 2, 3, 4, ..., 18, 19]
-// e.g. loop 1: [4, 14]
+// e.g. loop 0: [9]
+//		loop 1: [4, 14]
 //		loop 2: [2, 6, 11, 16]
 //		loop 3: [1, 3, 5, 7, 10, 12, 15, 17]
 //		loop 4: [8, 13, 18]
