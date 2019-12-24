@@ -198,6 +198,8 @@ int main()
 				{
 					if (!pDoc)
 						break;
+					if (i != 0)
+						writeResult2 << ", ";
 
 					char path[100] = u8".\\input\\";
 
@@ -209,7 +211,7 @@ int main()
 					char moviename[100] = { '\0' };
 					readInfo.getline(moviename, 100);
 					writeResult2 << "(" << pDoc->docID << ","
-						<< moviename << ") ";
+						<< moviename << ")";
 					readInfo.close();
 					pDoc = pDoc->next;
 				}

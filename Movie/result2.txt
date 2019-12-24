@@ -1,9 +1,9 @@
-(467,太极张三丰 太極張三豐) (243,爱在午夜降临前 Before Midnight) (588,我，花样女王 I, Tonya) (33,十二怒汉 12 Angry Men) (691,珍珠港 Pearl Harbor) 
-(258,X战警：逆转未来 X-Men: Days of Future Past) (503,神秘巨星 Secret Superstar) (1031,月光男孩 Moonlight) (247,聚焦 Spotlight) (67,音乐之声 The Sound of Music) 
-(414,深蓝 Deep Blue) (986,黑洞频率 Frequency) (70,穿条纹睡衣的男孩 The Boy in the Striped Pajamas) (159,穿越时空的少女 時をかける少女) (869,手机) 
+(243,爱在午夜降临前 Before Midnight), (467,太极张三丰 太極張三豐), (588,我，花样女王 I, Tonya), (33,十二怒汉 12 Angry Men), (691,珍珠港 Pearl Harbor)
+(258,X战警：逆转未来 X-Men: Days of Future Past), (503,神秘巨星 Secret Superstar), (1031,月光男孩 Moonlight), (247,聚焦 Spotlight), (67,音乐之声 The Sound of Music)
+(414,深蓝 Deep Blue), (986,黑洞频率 Frequency), (70,穿条纹睡衣的男孩 The Boy in the Striped Pajamas), (159,穿越时空的少女 時をかける少女), (869,手机)
 该电影不在数据库中，无法推荐
 该电影不在数据库中，无法推荐
-(836,大幻影 La Grande Illusion) (1013,嘉年华) (1029,面子 Saving Face) (159,穿越时空的少女 時をかける少女) (243,爱在午夜降临前 Before Midnight) 
-(0,霸王别姬) (301,极速风流 Rush) (447,爱在暹罗 รักแห่งสยาม) (802,新上海滩 新上海灘) (593,人再囧途之泰囧) 
-(445,蓝色大门 藍色大門) (182,源代码 Source Code) (712,鬼妈妈 Coraline) (173,朗读者 The Reader) (13,放牛班的春天 Les choristes) 
-(937,深渊 The Abyss) (745,蒙太奇 몽타주) (286,为奴十二年 12 Years a Slave) (368,超人总动员 The Incredibles) (321,落水狗 Reservoir Dogs) 
+(836,大幻影 La Grande Illusion), (1013,嘉年华), (1029,面子 Saving Face), (934,星际迷航 Star Trek), (159,穿越时空的少女 時をかける少女)
+(0,霸王别姬), (301,极速风流 Rush), (447,爱在暹罗 รักแห่งสยาม), (802,新上海滩 新上海灘), (593,人再囧途之泰囧)
+(445,蓝色大门 藍色大門), (702,巴黎，我爱你 Paris, je t&#39;aime), (182,源代码 Source Code), (351,千年女优 千年女優), (712,鬼妈妈 Coraline)
+(937,深渊 The Abyss), (745,蒙太奇 몽타주), (286,为奴十二年 12 Years a Slave), (744,那家伙的声音 그놈 목소리), (368,超人总动员 The Incredibles)
