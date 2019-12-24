@@ -5,7 +5,7 @@ Data struture homework
 
 - Windows 10
 - IDE：Visual Studio 2017，Qt Creator 5.12.4
-- 编程语言：C++
+- C++
 
 ### Insertion algorithm
 
