@@ -13,9 +13,9 @@ Data struture homework
 
 ### Example
 
-![example 1](img\example 1.png)
+<img src="img\example 1.png" alt="example gui"  />
 
-![example 2](img\example 2.png)
+<img src="img\example 2.png" alt="example gui"  />
 
-<img src="img\example gui.png" alt="example gui" style="zoom:67%;" />
+<img src="img\example gui.png" alt="example gui"  />
 
